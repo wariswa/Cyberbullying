@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+body {
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  font-family: 'Kanit', sans-serif;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  text-align: center;
+  }
+  
+
+#root {
+  position: absolute;
+  left: 50%;
+  top: 50vh;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 19px;
+  
+}
+
+
+canvas {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+}
+#container {
+  position: relative;
+}
+
+
+

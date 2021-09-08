@@ -31,7 +31,10 @@ export const App = () => {
     "ฉันก็รู้สึกแบบเดียวกันกับเธอ",
     "เพราะฉันคือเธอในโลกคู่ขนาน",
     "โลกที่ทุกคนเป็นใครก็ได้ที่ตัวเองต้องการ",
-    "โลกที่ตัวอักษรทำให้คนหายไปได้..."
+    "โลกที่ตัวอักษรทำให้คนหายไปได้...",
+    "wwwww",
+    "qqqqqq",
+    "qaqaqaqqaq"
     //wait for 3 seconds
     //fade to canvas 2
       
@@ -50,6 +53,8 @@ export const App = () => {
           alert("กรุณากรอกชื่อของคุณก่อนนะครับ")
         }
       }
+      
+
       if(loading){
         console.log("loading is true", loading)
         e.preventDefault()
@@ -85,6 +90,16 @@ export const App = () => {
     return content[count]
 
   }
+  React.useEffect (() => {
+    console.log ("useeffect count: ", count)
+    if (count === 14) {
+      const elem = document.getElementById("canvas1")
+      elem.style.display ="none"
+      const newcanvas = document.querySelector(".content--canvas")
+      newcanvas.style.display= "flex"
+
+    }
+  }, [count])
 
   return <div style={{zIndex: 1, color:"white"}} id="mytext">
     <Fade in={fade} timeout={1000}>

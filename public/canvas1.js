@@ -1,18 +1,18 @@
 
-var canvas = document.getElementById('canvas1');
+var canvas1 = document.getElementById('canvas1');
 var flr = Math.floor;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas1.width = window.innerWidth;
+canvas1.height = window.innerHeight;
 
-var halfw = canvas.width / 2,
-    halfh = canvas.height / 2,
+var halfw = canvas1.width / 2,
+    halfh = canvas1.height / 2,
     warpZ = 12,
     speed = 0.075;
 
-var ctx = canvas.getContext('2d');
-ctx.fillStyle = 'black';
-ctx.fillRect(0,0, canvas.width, canvas.height);
+var ctx1 = canvas1.getContext('2d');
+ctx1.fillStyle = 'black';
+ctx1.fillRect(0,0, canvas1.width, canvas1.height);
 
 function rnd(num1, num2) {
     return flr(Math.random() * num2 * 2) + num1;
@@ -56,11 +56,11 @@ var star = function() {
         var x2 = v[0] / (v[2] + speed * 0.50);
         var y2 = v[1] / (v[2] + speed * 0.50);
         
-        ctx.strokeStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
+        ctx1.strokeStyle = this.color;
+        ctx1.beginPath();
+        ctx1.moveTo(x, y);
+        ctx1.lineTo(x2, y2);
+        ctx1.stroke();
         
         if (x < 0 - halfw || x > halfw || y < 0 - halfh || y > halfh) {
             this.reset();
@@ -83,7 +83,7 @@ var starfield = function() {
     _init();
     
     this.draw = function() {
-        ctx.translate(halfw, halfh);
+        ctx1.translate(halfw, halfh);
         
         for(var i = 0, len = stars.length; i < len; i++) {
             var currentStar = stars[i];
@@ -105,9 +105,9 @@ function draw() {
     
     speed = 0.004;
   
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = 'rgba(0,0,0,0.2)';
-    ctx.fillRect(0,0, canvas.width, canvas.height);
+    ctx1.setTransform(1, 0, 0, 1, 0, 0);
+    ctx1.fillStyle = 'rgba(0,0,0,0.2)';
+    ctx1.fillRect(0,0, canvas1.width, canvas1.height);
     
     mStarField.draw();
     
@@ -117,9 +117,9 @@ function draw() {
 draw();
 
 window.onresize = function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas1.width = window.innerWidth;
+    canvas1.height = window.innerHeight;
 
-    halfw = canvas.width / 2;
-    halfh = canvas.height / 2;
+    halfw = canvas1.width / 2;
+    halfh = canvas1.height / 2;
 };

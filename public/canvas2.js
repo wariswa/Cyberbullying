@@ -1,4 +1,3 @@
-'use strict';
 
 const rayCount = 500;
 const rayPropCount = 8;
@@ -28,10 +27,15 @@ let simplex;
 let rayProps;
 
 function setup() {
+  try {
 	createCanvas();
   resize();
   initRays();
 	draw();
+  }
+  catch (e) {
+    console.log(e)
+  }
 }
 
 function initRays() {

@@ -15,6 +15,7 @@ body {
 
 #root {
   position: absolute;
+  z-index: 10;
   left: 50%;
   top: 50vh;
   -webkit-transform: translate(-50%, -50%);

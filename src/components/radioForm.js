@@ -1,21 +1,4 @@
 import React from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { FormLabel } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import { white } from '@material-ui/core/colors';
-
-
-const WhiteRadio = withStyles({
-    root: {
-      color: "#ffffff",
-      '&$checked': {
-        color:"#f1f1f1",
-      },
-    },
-    checked: {},
-  })((props) => <Radio color="default" {...props} />);
 
 
 export function RadioForm(props) {
@@ -47,18 +30,6 @@ export function RadioForm(props) {
         return () => {document.getElementById("canvas1").style = backup};
     }, [])
 
-    /*return (
-        <div className="container">
-            <FormLabel component="legend"><h2>วันนี้เธอเป็นอย่างไรบ้าง?</h2></FormLabel>
-            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                <FormControlLabel value="มีความสุขมาก" control={<WhiteRadio />} label="มีความสุขมาก" />
-                <FormControlLabel value="ก็ไม่ได้แย่นะ ค่อนข้างดี" control={<WhiteRadio />} label="ก็ไม่ได้แย่นะ ค่อนข้างดี" />
-                <FormControlLabel value="เฉยๆ เหมือนทุกๆวัน" control={<WhiteRadio />} label="เฉยๆ เหมือนทุกๆวัน" />
-                <FormControlLabel value="ไม่ค่อยดีเลย" control={<WhiteRadio />} label="ไม่ค่อยดีเลย" />
-                <FormControlLabel value="เป็นวันที่ไม่มีความสุขมากวันนึง" control={<WhiteRadio />} label="เป็นวันที่ไม่มีความสุขมากวันนึง" />
-            </RadioGroup>    
-        </div>
-    )*/
 
     return (
             <div className="radio-container">

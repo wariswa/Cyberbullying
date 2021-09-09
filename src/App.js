@@ -96,7 +96,7 @@ export const App = () => {
   }
   React.useEffect (() => {
     console.log ("useeffect count: ", count)
-    if (count === 10) {
+    if (count === 14) {
       console.log("count is 14...... ")
       document.getElementById("canvas1").id = "canvas2"
       console.log("id changed")
@@ -111,7 +111,7 @@ export const App = () => {
 
   return <>
   <div id="root"> 
-    <div style={{zIndex: 1, color:"red"}} id="mytext">
+    <div style={{zIndex: 1, color:"white"}} id="mytext">
       <Fade in={fade} timeout={1000}>
         <div style={{}}>
           {getComponent(count)}

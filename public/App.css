@@ -21,7 +21,7 @@
 
 .namebutton {
     font-family: 'Kanit', sans-serif;
-    background-color: rgb(199, 189, 230);
+    background-color: rgb(158, 173, 201);
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
@@ -41,13 +41,13 @@
 .namebutton:hover {
   height: 102%;
   width: 55%;
-  background-color: #9e86c4;
+  background-color: #3f679c;
   
 }
 
 .radiobutton {
     font-family: 'Kanit', sans-serif;
-    background-color: rgb(199, 189, 230);
+    background-color: rgb(158, 173, 201);
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
@@ -119,7 +119,7 @@
   }
   
   ul li:hover label{
-      color: #b99de7;
+      color: rgb(158, 173, 201);
       /*font-size: 1.35em;*/
       font-size: 23px;
   }
@@ -139,7 +139,7 @@
   }
   
   ul li:hover .check {
-    border: 5px solid #b99de7;
+    border: 5px solid rgb(158, 173, 201);
   }
   
   ul li .check::before {
@@ -159,20 +159,20 @@
   .radiobutton:hover {
     height: 40px;
     width: 42%;
-    background-color: #9e86c4;
+    background-color: #3f679c;
   }
 
 
   input[type=radio]:checked ~ .check {
-    border: 5px solid #b99de7;
+    border: 5px solid rgb(158, 173, 201);
   }
   
   input[type=radio]:checked ~ .check::before{
-    background: #b99de7;
+    background: rgb(158, 173, 201);
   }
   
   input[type=radio]:checked ~ label{
-    color: #b99de7;
+    color: rgb(158, 173, 201);
     font-size: 23px;
   }
   

@@ -36,7 +36,7 @@ export const App = () => {
     //fade to canvas 2
       
 ]
-  const count = React.useRef(0)
+  const [count, setCount] = React.useState(0)
   // const [loading, setLoading] = React.useState(false);
   let loading = false;
   const [fade, setFade] = React.useState(true);
@@ -52,7 +52,7 @@ export const App = () => {
     console.log("useEffect")
 
     document.getElementById("canvas1").addEventListener("click", (e)=> {
-      if(count.current >= 6){
+      if(count >= 6){
         if(!localStorage.getItem("name") || localStorage.getItem("name") === ""){
           alert("กรุณากรอกชื่อของคุณก่อนนะครับ")
         }
@@ -70,7 +70,7 @@ export const App = () => {
       setFade(false);
       setTimeout(()=>{
         console.log("current count is, ", count)
-        count.current = count.current + 1
+        setCount(prevCount => prevCount + 1)
         console.log("current fade is", fade)
         setFade(true);
       }, 1000)
@@ -96,14 +96,14 @@ export const App = () => {
   }
   React.useEffect (() => {
     console.log ("useeffect count: ", count)
-    if (count.current == 14) {
+    if (count === 10) {
       console.log("count is 14...... ")
       document.getElementById("canvas1").id = "canvas2"
       console.log("id changed")
       document.getElementById("canvas1script").remove()
       const canvas2script = document.createElement("script")
       canvas2script.id = "canvas2script"
-      canvas2script.src = "./canvas2.js"
+      canvas2script.src = "./aurora.js"
       document.getElementsByTagName("body").item(0).appendChild(canvas2script)
       
     }
@@ -111,13 +111,13 @@ export const App = () => {
 
   return <>
   <div id="root"> 
-  <div style={{zIndex: 1, color:"red"}} id="mytext">
-    <Fade in={fade} timeout={1000}>
-      <div style={{}}>
-        {getComponent(count.current)}
-      </div>
-    </Fade>
-  </div>
+    <div style={{zIndex: 1, color:"red"}} id="mytext">
+      <Fade in={fade} timeout={1000}>
+        <div style={{}}>
+          {getComponent(count)}
+        </div>
+      </Fade>
+    </div>
   </div>
   <canvas ref={canvasRef} id="canvas1"></canvas>
   </>;

@@ -46,7 +46,7 @@ export const App = () => {
     if(!document.getElementById("canvas1script")){
       const canvas1script = document.createElement("script")
       canvas1script.id = "canvas1script"
-      canvas1script.src = "canvas2.js"
+      canvas1script.src = "canvas1.js"
       document.getElementsByTagName("body").item(0).appendChild(canvas1script)
     }
     console.log("useEffect")

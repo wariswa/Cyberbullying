@@ -20,7 +20,7 @@ var c = canvas1.getContext('2d')
 
 const randomInt = ( max, min) => Math.floor( Math.random() * (max - min) + min)
 
-var bg = c.createRadialGradient( canvas1.width/ 2, canvas1.height * 3, canvas1.height ,canvas1.width/ 2,canvas1.height , canvas.height * 4);
+var bg = c.createRadialGradient( canvas1.width/ 2, canvas1.height * 3, canvas1.height ,canvas1.width/ 2,canvas1.height , canvas1.height * 4);
 bg.addColorStop(0,"#32465E");
 bg.addColorStop(.4,"#000814");
 bg.addColorStop(.8,"#000814");

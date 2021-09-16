@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-// import fade from "fade";
 import Fade from '@material-ui/core/Fade';
 import { NameForm } from './components/nameForm';
 import { RadioForm } from './components/radioForm';
-import { Submitbutton, submitButton } from './components/Button';
+import { Submitbutton } from './components/Button';
 import { InputBox } from './components/InputBox';
+import {LogoScreen } from './components/LogoScreen';
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
@@ -14,8 +13,10 @@ export const GetName = () => {
 
 export const App = () => {
   const [count, setCount] = React.useState(0)
+  const [textcolor, setTextColor] = React.useState('#ffffff')
 
   const content = [
+    <LogoScreen></LogoScreen>,
     "*Trigger Warning*",
     <>{"เว็บไซต์นี้มีคำถามเกี่ยวกับเหตุการณ์หรือประสบการณ์ในอดีตของตัวคุณ"} <br/> {"ซึ่งอาจมีผลกระทบต่อจิตใจคุณ ไม่มากก็น้อย"}</>,
     "หากคำถามของเราทำให้คุณรู้สึกไม่สบายใจหรืออึดอัด สามารถออกจากเว็บไซต์เราได้ทันที",
@@ -55,46 +56,24 @@ export const App = () => {
       canvas1script.src = "canvas1.js"
       document.getElementsByTagName("body").item(0).appendChild(canvas1script)
     }
-    console.log("useEffect")
 
     document.addEventListener("click", (e)=> {
-      console.log(e)
       if (e.path.map(p=>p.id).includes("mytext")) {
         return 
       }
-      e.path.forEach(ele=>console.log(ele))
-      if(count >= 6){
-        if(!localStorage.getItem("name") || localStorage.getItem("name") === ""){
-          alert("กรุณากรอกชื่อของคุณก่อนนะครับ")
-        }
-      }
       
-
       if(loading){
-        console.log("loading is true", loading)
         e.preventDefault()
         e.stopPropagation()
         return
       }
       loading = true;
-      console.log("fading is true, setting it to false", fade)
       setFade(false);
       setTimeout(()=>{
-        console.log("current count is, ", count)
         setCount(prevCount => prevCount + 1)
-        console.log("current fade is", fade)
         setFade(true);
       }, 1000)
       
-      // loading = true
-      // const elem = document.getElementById("mytext")
-      // fade.out(elem, 1000);
-      // setTimeout(function () {
-      //   elem.innerHTML = content[count];
-      //   console.log("current count is", count)
-      //   count += 1
-      //   fade.in(elem, 1000);
-      // }, 1000);
       setTimeout(function () {
         loading = false;
       }, 2000)
@@ -106,11 +85,8 @@ export const App = () => {
 
   }
   React.useEffect (() => {
-    console.log ("useeffect count: ", count)
     if (count === 14) {
-      console.log("count is 14...... ")
       document.getElementById("canvas1").id = "canvas2"
-      console.log("id changed")
       document.getElementById("canvas1script").remove()
       const canvas2script = document.createElement("script")
       canvas2script.id = "canvas2script"
@@ -122,7 +98,7 @@ export const App = () => {
 
   return <>
   <div id="root"> 
-    <div style={{zIndex: 1, color:"red"}} id="mytext">
+    <div style={{zIndex: 1, color: textcolor}} id="mytext">
       <Fade in={fade} timeout={1000}>
         <div style={{}}>
           {getComponent(count)}

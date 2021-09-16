@@ -12,13 +12,10 @@ export function InputBox(props) {
     }, [])
 
     const handleChange = (e) => {
-      console.log(e)
-      console.log(e.target)
       setText(e.target.value)
     }
     
     const handleSubmit = (e) => {
-      console.log(e)
       e.preventDefault();
       if(text.length < 1){
         alert("กรุณากรอกข้อความ");
@@ -33,26 +30,17 @@ export function InputBox(props) {
  
         return (
         <form onSubmit={handleSubmit}>
-        <label className="inputbox-container"> Hello World
-          {/* <label className="inputbox-container">
-            เท่าที่จำได้ เธอเคยพิมพ์ว่าอะไรบ้างล่ะ?
-            <input
-              className="inputbox"
-              type="text"
-              value={text} //ตอนแรกมันเป็น name
-              onChange={e => setText(e.target.value)}
-              placeholder="โปรดกรอกข้อความที่นี่"
-              required
-              id="message"
-            />
-          </label> */}
-          {/* <div id="message" contenteditable="true">Fill out this form</div> */}
-          <textarea id="message" onChange={handleChange} value={text}></textarea>
+        <label className="inputbox-container"> Hello World  
+          {/* //!TODO:  change hello world with proper text and give some padding and css */}
+          {/* //!TODO:  also change css for button and position it correctly... */}
+          
+          <textarea id="message" onChange={handleChange} value={text}
+            style={{fontSize: "17px", color: "white"}}
+          ></textarea>
           <input className="submit-button" type="submit" value="ยืนยัน" onClick={handleSubmit}
           />
           </label>
         </form>
       );
-
 }
       

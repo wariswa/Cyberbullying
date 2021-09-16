@@ -1,6 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .nameform {
     font-family: 'Kanit', sans-serif;
@@ -70,7 +75,7 @@
     position: relative;
     margin: 2px auto;
     height: auto;
-    width: 500px;
+    width: 70vw;
     
   }
   
@@ -253,8 +258,8 @@
   overflow-y: auto;
   overflow-wrap: break-word;
   display: block;
-  width: 30rem;
-  height: 17rem;
+  width: 90vw;
+  height: 70vh;
   border: 0.16em solid rgb(255, 255, 255);
   border-radius: 1em;
   box-sizing: border-box;

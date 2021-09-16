@@ -17,135 +17,127 @@ const dist = (x1, y1, x2, y2) => sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 const angle = (x1, y1, x2, y2) => atan2(y2 - y1, x2 - x1);
 const lerp = (n1, n2, speed) => (1 - speed) * n1 + speed * n2;
 
-
-const rayCount = 500;
-const rayPropCount = 8;
-const rayPropsLength = rayCount * rayPropCount;
-const baseLength = 200;
-const rangeLength = 200;
-const baseSpeed = 0.05;
-const rangeSpeed = 0.1;
-const baseWidth = 10;
-const rangeWidth = 20;
-const baseHue = 120;
+const circleCount = 150;
+const circlePropCount = 8;
+const circlePropsLength = circleCount * circlePropCount;
+const baseSpeed = 0.1;
+const rangeSpeed = 1;
+const baseTTL = 150;
+const rangeTTL = 200;
+const baseRadius = 100;
+const rangeRadius = 200;
 const rangeHue = 60;
-const baseTTL = 50;
-const rangeTTL = 100;
-const noiseStrength = 100;
 const xOff = 0.0015;
 const yOff = 0.0015;
 const zOff = 0.0015;
-const backgroundColor = 'hsla(220,60%,3%,1)';
+const backgroundColor = 'hsla(0,0%,5%,1)';
 
 let container;
 let canvas;
 let ctx;
-let center;
-let tick;
+let circles;
+let circleProps;
 let simplex;
-let rayProps;
+let baseHue;
 
 function setup() {
   try {
-	createCanvas();
-  resize();
-  initRays();
-	draw();
+    createCanvas();
+    resize();
+    initCircles();
+    draw();
   }
-  catch (e) {
-    console.log(e)
+  catch(e) {
+    console.log(e);
   }
 }
 
-function initRays() {
-  tick = 0;
+function initCircles() {
+  circleProps = new Float32Array(circlePropsLength);
   simplex = new SimplexNoise();
-  rayProps = new Float32Array(rayPropsLength);
+  baseHue = 220;
 
   let i;
 
-  for (i = 0; i < rayPropsLength; i += rayPropCount) {
-    initRay(i);
+  for (i = 0; i < circlePropsLength; i += circlePropCount) {
+    initCircle(i);
   }
 }
 
-function initRay(i) {
-  let length, x, y1, y2, n, life, ttl, width, speed, hue;
+function initCircle(i) {
+  let x, y, n, t, speed, vx, vy, life, ttl, radius, hue;
 
-  length = baseLength + rand(rangeLength);
   x = rand(canvas.a.width);
-  y1 = center[1] + noiseStrength;
-  y2 = center[1] + noiseStrength - length;
-  n = simplex.noise3D(x * xOff, y1 * yOff, tick * zOff) * noiseStrength;
-  y1 += n;
-  y2 += n;
+  y = rand(canvas.a.height);
+  n = simplex.noise3D(x * xOff, y * yOff, baseHue * zOff);
+  t = rand(TAU);
+  speed = baseSpeed + rand(rangeSpeed);
+  vx = speed * cos(t);
+  vy = speed * sin(t);
   life = 0;
   ttl = baseTTL + rand(rangeTTL);
-  width = baseWidth + rand(rangeWidth);
-  speed = baseSpeed + rand(rangeSpeed) * (round(rand(1)) ? 1 : -1);
-  hue = baseHue + rand(rangeHue);
+  radius = baseRadius + rand(rangeRadius);
+  hue = baseHue + n * rangeHue;
 
-  rayProps.set([x, y1, y2, life, ttl, width, speed, hue], i);
+  circleProps.set([x, y, vx, vy, life, ttl, radius, hue], i);
 }
 
-function drawRays() {
+function updateCircles() {
   let i;
 
-  for (i = 0; i < rayPropsLength; i += rayPropCount) {
-    updateRay(i);
+  baseHue++;
+
+  for (i = 0; i < circlePropsLength; i += circlePropCount) {
+    updateCircle(i);
   }
 }
 
-function updateRay(i) {
+function updateCircle(i) {
   let i2=1+i, i3=2+i, i4=3+i, i5=4+i, i6=5+i, i7=6+i, i8=7+i;
-  let x, y1, y2, life, ttl, width, speed, hue;
+  let x, y, vx, vy, life, ttl, radius, hue;
 
-  x = rayProps[i];
-  y1 = rayProps[i2];
-  y2 = rayProps[i3];
-  life = rayProps[i4];
-  ttl = rayProps[i5];
-  width = rayProps[i6];
-  speed = rayProps[i7];
-  hue = rayProps[i8];
+  x = circleProps[i];
+  y = circleProps[i2];
+  vx = circleProps[i3];
+  vy = circleProps[i4];
+  life = circleProps[i5];
+  ttl = circleProps[i6];
+  radius = circleProps[i7];
+  hue = circleProps[i8];
 
-  drawRay(x, y1, y2, life, ttl, width, hue);
+  drawCircle(x, y, life, ttl, radius, hue);
 
-  x += speed;
   life++;
 
-  rayProps[i] = x;
-  rayProps[i4] = life;
+  circleProps[i] = x + vx;
+  circleProps[i2] = y + vy;
+  circleProps[i5] = life;
 
-  (checkBounds(x) || life > ttl) && initRay(i);
+  (checkBounds(x, y, radius) || life > ttl) && initCircle(i);
 }
 
-function drawRay(x, y1, y2, life, ttl, width, hue) {
-  let gradient;
-
-  gradient = ctx.a.createLinearGradient(x, y1, x, y2);
-  gradient.addColorStop(0, `hsla(${hue},100%,65%,0)`);
-  gradient.addColorStop(0.5, `hsla(${hue},100%,65%,${fadeInOut(life, ttl)})`);
-  gradient.addColorStop(1, `hsla(${hue},100%,65%,0)`);
-
+function drawCircle(x, y, life, ttl, radius, hue) {
   ctx.a.save();
+  ctx.a.fillStyle = `hsla(${hue},60%,30%,${fadeInOut(life,ttl)})`;
   ctx.a.beginPath();
-  ctx.a.strokeStyle = gradient;
-  ctx.a.lineWidth = width;
-  ctx.a.moveTo(x, y1);
-  ctx.a.lineTo(x, y2);
-  ctx.a.stroke();
+  ctx.a.arc(x,y, radius, 0, TAU);
+  ctx.a.fill();
   ctx.a.closePath();
   ctx.a.restore();
 }
 
-function checkBounds(x) {
-  return x < 0 || x > canvas.a.width;
+function checkBounds(x, y, radius) {
+  return (
+    x < -radius ||
+    x > canvas.a.width + radius ||
+    y < -radius ||
+    y > canvas.a.height + radius
+  );
 }
 
 function createCanvas() {
   container = document.querySelector('#container');
-	canvas = {
+  canvas = {
 		a: document.createElement('canvas'),
 		b: document.createElement('canvas')
 	};
@@ -160,8 +152,7 @@ function createCanvas() {
 	ctx = {
 		a: canvas.a.getContext('2d'),
 		b: canvas.b.getContext('2d')
-  };
-  center = [];
+	};
 }
 
 function resize() {
@@ -176,31 +167,24 @@ function resize() {
   canvas.b.height = innerHeight;
   
   ctx.b.drawImage(canvas.a, 0, 0);
-
-  center[0] = 0.5 * canvas.a.width;
-  center[1] = 0.5 * canvas.a.height;
 }
 
 function render() {
   ctx.b.save();
-  ctx.b.filter = 'blur(12px)';
-  ctx.a.globalCompositeOperation = 'lighter';
+  ctx.b.filter = 'blur(50px)';
   ctx.b.drawImage(canvas.a, 0, 0);
   ctx.b.restore();
 }
 
 function draw() {
-  tick++;
   ctx.a.clearRect(0, 0, canvas.a.width, canvas.a.height);
   ctx.b.fillStyle = backgroundColor;
-  ctx.b.fillRect(0, 0, canvas.b.width, canvas.a.height);
-  drawRays();
+  ctx.b.fillRect(0, 0, canvas.b.width, canvas.b.height);
+  updateCircles();
   render();
-
 	window.requestAnimationFrame(draw);
 }
 
+// window.addEventListener('load', setup);
 setup()
-
-//window.addEventListener('load', setup);
 window.addEventListener('resize', resize);

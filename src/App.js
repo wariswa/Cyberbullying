@@ -4,12 +4,17 @@ import ReactDOM from 'react-dom';
 import Fade from '@material-ui/core/Fade';
 import { NameForm } from './components/nameForm';
 import { RadioForm } from './components/radioForm';
+import { Submitbutton, submitButton } from './components/Button';
+import { InputBox } from './components/InputBox';
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
 }
 
+
 export const App = () => {
+  const [count, setCount] = React.useState(0)
+
   const content = [
     "*Trigger Warning*",
     <>{"เว็บไซต์นี้มีคำถามเกี่ยวกับเหตุการณ์หรือประสบการณ์ในอดีตของตัวคุณ"} <br/> {"ซึ่งอาจมีผลกระทบต่อจิตใจคุณ ไม่มากก็น้อย"}</>,
@@ -31,12 +36,13 @@ export const App = () => {
     "โลกที่ตัวอักษรทำให้คนหายไปได้...",
     "wwwww",
     "qqqqqq",
-    "qaqaqaqqaq"
+    "qaqaqaqqaq",
     //wait for 3 seconds
     //fade to canvas 2
+    <InputBox></InputBox>,
+    <Submitbutton handleCount={setCount}></Submitbutton>
       
 ]
-  const [count, setCount] = React.useState(0)
   // const [loading, setLoading] = React.useState(false);
   let loading = false;
   const [fade, setFade] = React.useState(true);
@@ -51,7 +57,12 @@ export const App = () => {
     }
     console.log("useEffect")
 
-    document.getElementById("canvas1").addEventListener("click", (e)=> {
+    document.addEventListener("click", (e)=> {
+      console.log(e)
+      if (e.path.map(p=>p.id).includes("mytext")) {
+        return 
+      }
+      e.path.forEach(ele=>console.log(ele))
       if(count >= 6){
         if(!localStorage.getItem("name") || localStorage.getItem("name") === ""){
           alert("กรุณากรอกชื่อของคุณก่อนนะครับ")
@@ -111,7 +122,7 @@ export const App = () => {
 
   return <>
   <div id="root"> 
-    <div style={{zIndex: 1, color:"white"}} id="mytext">
+    <div style={{zIndex: 1, color:"red"}} id="mytext">
       <Fade in={fade} timeout={1000}>
         <div style={{}}>
           {getComponent(count)}

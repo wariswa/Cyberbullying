@@ -38,12 +38,12 @@
     transition: all 0.25s linear;
 }
 
-.namebutton:hover {
+/* .namebutton:hover {
   height: 102%;
   width: 55%;
   background-color: #3f679c;
   
-}
+} */
 
 .radiobutton {
     font-family: 'Kanit', sans-serif;
@@ -78,6 +78,8 @@
       color: #ffffff;
       font-size: 23px;
       margin: 0px;
+      align-items: center;
+      text-align: center;
   }
   
   .radio-container ul{
@@ -142,6 +144,7 @@
     border: 5px solid rgb(158, 173, 201);
   }
   
+  /* small check inside */
   ul li .check::before {
     display: block;
     position: absolute;
@@ -152,8 +155,9 @@
     top: 3px;
     left: 3px;
     margin: auto;
-    transition: #222222 0.25s linear;
-    -webkit-transition: #222222 0.25s linear;
+    /* transition: #222222 2s linear;
+    -webkit-transition: #222222 2s linear; */
+    transition: 0.25s linear;
   }
 
   .radiobutton:hover {
@@ -182,3 +186,87 @@
   .MuiTypography-body1:hover {
     font-size: 23px !important;
   } */
+
+/* submitbutton */
+.submit-container{
+  align-items:center ;
+  text-align: center;
+}
+
+.button {
+  display: block;
+  padding: 10px;
+  /* margin: 20px; */
+  margin-top: 20px;
+  width: 100%;
+  border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 22px;
+  color: #ffffff;
+  text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
+  text-align: center;
+  transition: all 0.2s;
+  background-color:transparent;
+  cursor: pointer;
+  align-items: center;
+}
+
+.button:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+/* Input text box */
+.inputbox-container {
+  display: block;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* .inputbox {
+  display: block;
+  width: 30rem;
+  height: 17rem;
+  border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 1em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Kanit', sans-serif;
+  color: #ffffff;
+  text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
+  text-align: left;
+  float: left;
+  background-color:transparent;
+  align-items: center;
+  outline: none;
+  
+} */
+
+#message {
+  line-break: auto;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+  display: block;
+  width: 30rem;
+  height: 17rem;
+  border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 1em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Kanit', sans-serif;
+  color: #ffffff;
+  text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
+  text-align: left;
+  float: left;
+  background-color:transparent;
+  align-items: center;
+  outline: none;
+  padding: 20px 25px 0 25px;
+  resize: none;
+}

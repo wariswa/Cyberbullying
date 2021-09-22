@@ -18,16 +18,16 @@ export function RadioForm(props) {
             return;
         }
         localStorage.setItem('radio1', value);
-        const elem = document.getElementById('canvas1');
+        const elem = document.querySelector('canvas');
         elem.click()
     }
 
     React.useEffect(() => {
         console.log("Radioform: useEffect");
-        const backup = document.getElementById("canvas1").style;
-        document.getElementById("canvas1").style.pointerEvents = "none";
+        const backup = document.querySelector("canvas").style;
+        document.querySelector("canvas").style.pointerEvents = "none";
 
-        return () => {document.getElementById("canvas1").style = backup};
+        return () => {document.querySelector("canvas").style = backup};
     }, [])
 
 

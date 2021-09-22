@@ -4,11 +4,11 @@ import { useState } from 'react';
 export function InputBox(props) {
     const [text, setText] = useState("");
     React.useEffect(() => {
-        console.log("InputBox: useEffect");
-        const backup = document.getElementById("canvas2").style;
-        document.getElementById("canvas2").style.pointerEvents = "none";
+      console.log("nameform: useEffect");
+      const backup = document.querySelector("canvas").style;
+      document.querySelector("canvas").style.pointerEvents = "none";
 
-        return () => {document.getElementById("canvas2").style = backup};
+      return () => {document.querySelector("canvas").style = backup};
     }, [])
 
     const handleChange = (e) => {
@@ -23,7 +23,7 @@ export function InputBox(props) {
       }
       console.log(`Submitting Message ${text}`)
       localStorage.setItem('message1', text);
-      const elem = document.getElementById('canvas2');
+      const elem = document.querySelector('canvas');
       elem.click()
     }
 

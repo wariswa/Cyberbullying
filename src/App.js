@@ -1,19 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Fade from '@material-ui/core/Fade';
 import { NameForm } from './components/nameForm';
 import { RadioForm } from './components/radioForm';
 import { Submitbutton } from './components/Button';
 import { InputBox } from './components/InputBox';
 import {LogoScreen } from './components/LogoScreen';
+import * as PIXI from 'pixi.js';
+import { DropShadowFilter } from '@pixi/filter-drop-shadow';
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
 }
 
+const randomInt = ( max, min) => Math.floor( Math.random() * (max - min) + min)
 
 export const App = () => {
-  const [count, setCount] = React.useState(0)
-  const [textcolor, setTextColor] = React.useState('#ffffff')
+  const [count, setCount] = useState(0)
+  const [textcolor, setTextColor] = useState('#ffffff')
 
   const content = [
     <LogoScreen></LogoScreen>,
@@ -45,11 +48,146 @@ export const App = () => {
       
 ]
   // const [loading, setLoading] = React.useState(false);
-  let loading = false;
-  const [fade, setFade] = React.useState(true);
-  const canvasRef = React.useRef()
+  let loading = useRef(false);
+  const [fade, setFade] = useState(true);
+  const canvasRef = useRef()
 
-  React.useEffect(() => {
+  useEffect(()=> {
+    const app = new PIXI.Application({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      antialias: true,
+      transparent: true,
+      resolution: 1
+    })
+    app.renderer.backgroundColor = 0x000000;
+    document.body.appendChild(app.view)
+    document.addEventListener("click", (e) => {
+      console.log(e)
+      if (e.path.map(p=>p.id).includes("mytext")) {
+        return 
+      }
+      if(loading.current){
+        e.preventDefault()
+        e.stopPropagation()
+        return
+      }
+      loading.current = true;
+      setFade(false);
+      setTimeout(()=>{
+        setCount(prevCount => prevCount + 1)
+        setFade(true);
+      }, 1000)
+      
+      setTimeout(function () {
+        loading.current = false;
+      }, 2000)
+    })
+    
+    let c, bg;
+
+    function gradient() {
+      const canvas1 = document.createElement('canvas');
+      c = canvas1.getContext('2d');
+      bg = c.createRadialGradient(
+        canvas1.width / 2,
+        canvas1.height * 3,
+        canvas1.height,
+        canvas1.width / 2,
+        canvas1.height,
+        canvas1.height * 4
+      );
+      bg.addColorStop(0, '#32465E');
+      bg.addColorStop(0.4, '#000814');
+      bg.addColorStop(0.8, '#000814');
+      bg.addColorStop(1, '#000');
+      c.fillStyle = bg;
+      c.fillRect(0, 0, window.innerWidth, window.innerWidth);
+      const base = new PIXI.BaseTexture.from(canvas1);
+      const texture = new PIXI.Texture(base);
+      const sprite = new PIXI.Sprite(texture);
+      sprite.width = window.innerWidth;
+      sprite.height = window.innerHeight;
+      return sprite;
+    }
+
+    // let container = new PIXI.Container();
+    // container.addChild(gradient());
+    app.stage.addChild(gradient());
+
+    var n_stars = 150
+    var colors = [ '#176ab6', '#fb9b39']
+    for ( let i = 0; i < 98; i++) {
+      colors.push( '#fff')
+    }
+    var g = new PIXI.Graphics() ;
+    var dropShadowFilter = new DropShadowFilter();
+        dropShadowFilter.color = 0xffffff;
+        dropShadowFilter.alpha = 0.5;
+        dropShadowFilter.blur = 10;
+        dropShadowFilter.distance = 2;
+        g.filters = [dropShadowFilter];
+    app.stage.addChild(g)
+    
+    class Star {
+
+      constructor( x, y, radius, color) {
+        this.x = x || randomInt( 0, window.innerWidth)
+        this.y = y || randomInt( 0, window.innerHeight)
+        this.radius = radius || Math.random() * 2
+        this.color = color || colors[randomInt(0, colors.length)]
+        this.dy = -Math.random() * .3 
+      }
+      
+      draw () {
+        g.beginFill(0xffffff, 0.5)
+        g.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
+        
+        
+        g.endFill()
+        
+      }
+      update( arrayStars = [] ) {
+        if ( this.y - this.radius < 0 ) this.createNewStar( arrayStars )
+        
+        this.y += this.dy
+        this.draw()
+      }
+      createNewStar( arrayStars = [] ) {
+        let i = arrayStars.indexOf( this )
+        arrayStars.splice( i, 1)
+        arrayStars.push( new Star( false, window.innerHeight + 5))
+      }
+    }
+    var stars = []
+    function init() {
+      for( let i = 0; i < n_stars; i++ ) {
+        stars.push( new Star( ) )
+      }
+    }
+    init()
+    document.addEventListener( 'resize', () => {
+      stars = []
+      init()
+    })
+    function animate() {
+      requestAnimationFrame( animate)
+      // c.clearRect( 0, 0, window.innerWidth, window.innerHeight)
+      // c.fillStyle = bg
+      // c.fillRect(0, 0, window.innerWidth, window.innerHeight)
+      g.clear()
+      stars.forEach( s => s.update( stars ))
+      // app.renderer.render( app.stage)
+    }
+    animate()
+    
+    return () => {
+      app.destroy(true)
+    }
+
+  }, [])
+
+  /*React.useEffect(() => {
     if(!document.getElementById("canvas1script")){
       const canvas1script = document.createElement("script")
       canvas1script.id = "canvas1script"
@@ -78,13 +216,13 @@ export const App = () => {
         loading = false;
       }, 2000)
   })
-}, [])
+}, [])*/
 
   const getComponent = (count) => {
     return content[count]
 
   }
-  React.useEffect (() => {
+  /*React.useEffect (() => {
     if (count === 14) {
       document.getElementById("canvas1").id = "canvas2"
       document.getElementById("canvas1script").remove()
@@ -94,7 +232,7 @@ export const App = () => {
       document.getElementsByTagName("body").item(0).appendChild(canvas2script)
       
     }
-  }, [count])
+  }, [count])*/
 
   return <>
   <div id="root"> 
@@ -106,6 +244,5 @@ export const App = () => {
       </Fade>
     </div>
   </div>
-  <canvas ref={canvasRef} id="canvas1"></canvas>
   </>;
 }

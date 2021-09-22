@@ -5,10 +5,10 @@ export function NameForm(props) {
     const [name, setName] = useState("");
     React.useEffect(() => {
         console.log("NameForm: useEffect");
-        const backup = document.getElementById("canvas1").style;
-        document.getElementById("canvas1").style.pointerEvents = "none";
+        const backup = document.querySelector("canvas").style;
+        document.querySelector("canvas").style.pointerEvents = "none";
 
-        return () => {document.getElementById("canvas1").style = backup};
+        return () => {document.querySelector("canvas").style = backup};
     }, [])
     
     const handleSubmit = (e) => {
@@ -20,7 +20,7 @@ export function NameForm(props) {
       }
       console.log(`Submitting Name ${name}`)
       localStorage.setItem('name', name);
-      const elem = document.getElementById('canvas1');
+      const elem = document.querySelector('canvas');
       elem.click()
     }
     return (

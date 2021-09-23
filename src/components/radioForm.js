@@ -12,27 +12,27 @@ export function RadioForm(props) {
         }
     };
     const handleRadioSubmit = (e) => {
+        props.allowClick.current = true
         e.preventDefault();
         if(!value || value.length === 0){
             alert("Please select an option")
             return;
         }
         localStorage.setItem('radio1', value);
-        const elem = document.querySelector('canvas');
-        elem.click()
+        document.body.click()
     }
 
     React.useEffect(() => {
         console.log("Radioform: useEffect");
-        const backup = document.querySelector("canvas").style;
-        document.querySelector("canvas").style.pointerEvents = "none";
-
-        return () => {document.querySelector("canvas").style = backup};
+        setValue(null)
+        localStorage.removeItem('radio1')
+        props.allowClick.current = false
+        return () => {props.allowClick.current = true};
     }, [])
 
 
     return (
-            <div className="radio-container">
+            <div className="radio-container nonskip">
         
             <h2>วันนี้เธอเป็นอย่างไรบ้าง?</h2>
             

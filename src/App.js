@@ -17,6 +17,7 @@ const randomInt = ( max, min) => Math.floor( Math.random() * (max - min) + min)
 export const App = () => {
   const [count, setCount] = useState(0)
   const [textcolor, setTextColor] = useState('#ffffff')
+  const allowClick = useRef(true)
 
   const content = [
     <LogoScreen></LogoScreen>,
@@ -29,9 +30,9 @@ export const App = () => {
     //flash
     //same canvas
     //nameForm appear
-    <NameForm></NameForm>,
+    <NameForm allowClick={allowClick}></NameForm>,
     <GetName></GetName>, //name of users
-    <RadioForm></RadioForm>,
+    <RadioForm allowClick={allowClick}></RadioForm>,
     //HowAreYou Radio Form
     "ขอให้วันนี้เป็นวันที่ดีสำหรับเธอนะ",
     "ฉันก็รู้สึกแบบเดียวกันกับเธอ",
@@ -43,14 +44,40 @@ export const App = () => {
     "qaqaqaqqaq",
     //wait for 3 seconds
     //fade to canvas 2
-    <InputBox></InputBox>,
-    <Submitbutton handleCount={setCount}></Submitbutton>
+    <InputBox allowClick={allowClick}></InputBox>,
+    <Submitbutton handleCount={setCount} allowClick={allowClick}></Submitbutton>
       
 ]
   // const [loading, setLoading] = React.useState(false);
   let loading = useRef(false);
   const [fade, setFade] = useState(true);
-  const canvasRef = useRef()
+
+  const handleClick = (e) => {
+    console.log(e)
+    // if event path elements contains "nonskip" as classname, return
+    if (e.path.find(e => e?.classList?.contains("nonskip"))) return;
+    if(!allowClick.current){
+      return;
+    }
+    // if (e.path.map(p=>p.classList).includes("nonskip")) {
+    //   return 
+    // }
+    if(loading.current){
+      e.preventDefault()
+      e.stopPropagation()
+      return
+    }
+    loading.current = true;
+    setFade(false);
+    setTimeout(()=>{
+      setCount(prevCount => prevCount + 1)
+      setFade(true);
+    }, 1000)
+    
+    setTimeout(function () {
+      loading.current = false;
+    }, 2000)
+  }
 
   useEffect(()=> {
     const app = new PIXI.Application({
@@ -62,27 +89,8 @@ export const App = () => {
     })
     app.renderer.backgroundColor = 0x000000;
     document.body.appendChild(app.view)
-    document.addEventListener("click", (e) => {
-      console.log(e)
-      if (e.path.map(p=>p.id).includes("mytext")) {
-        return 
-      }
-      if(loading.current){
-        e.preventDefault()
-        e.stopPropagation()
-        return
-      }
-      loading.current = true;
-      setFade(false);
-      setTimeout(()=>{
-        setCount(prevCount => prevCount + 1)
-        setFade(true);
-      }, 1000)
-      
-      setTimeout(function () {
-        loading.current = false;
-      }, 2000)
-    })
+    document.addEventListener("click", handleClick)
+    document.addEventListener("touchstart", handleClick)
     
     let c, bg;
 
@@ -222,27 +230,13 @@ export const App = () => {
     return content[count]
 
   }
-  /*React.useEffect (() => {
-    if (count === 14) {
-      document.getElementById("canvas1").id = "canvas2"
-      document.getElementById("canvas1script").remove()
-      const canvas2script = document.createElement("script")
-      canvas2script.id = "canvas2script"
-      canvas2script.src = "./aurora.js"
-      document.getElementsByTagName("body").item(0).appendChild(canvas2script)
-      
-    }
-  }, [count])*/
+  
 
-  return <>
-  <div id="root"> 
-    <div style={{zIndex: 1, color: textcolor}} id="mytext">
+  return <div id="root"> 
       <Fade in={fade} timeout={1000}>
-        <div style={{}}>
-          {getComponent(count)}
-        </div>
-      </Fade>
+    <div style={{zIndex: 1, color: textcolor}} id="mytext">
+        {getComponent(count)}
     </div>
+      </Fade>
   </div>
-  </>;
 }

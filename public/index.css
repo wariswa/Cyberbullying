@@ -4,6 +4,7 @@ body {
   padding: 0px;
   margin: 0px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* for removing the highlight */
   font-family: 'Kanit', sans-serif;
   -webkit-user-select: none; /* Safari */        
   -moz-user-select: none; /* Firefox */

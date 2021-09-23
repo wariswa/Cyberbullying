@@ -5,10 +5,10 @@ export function Submitbutton(props) {
     const [value, setValue] = React.useState(null);
 
     const handleSubmit = (event, text) => {
+        props.allowClick.current = true
         console.log(event.target.innerText)
         if(event.target.innerText.length > 0){
             setValue(event.target.innerText)
-        
         }
         if(text === "firstbutton"){
             props.handleCount(0) //TODO: change 0 with proper destination screen count
@@ -33,11 +33,9 @@ export function Submitbutton(props) {
     // }
 
     React.useEffect(() => {
-        console.log("Submitbutton: useEffect");
-        const backup = document.getElementById("canvas2").style;
-        document.getElementById("canvas2").style.pointerEvents = "none";
-
-        return () => {document.getElementById("canvas2").style = backup};
+        console.log("NameForm: useEffect");
+        props.allowClick.current = false
+        return () => {props.allowClick.current = true};
     }, [])
 
     return (

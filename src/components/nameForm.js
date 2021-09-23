@@ -4,14 +4,19 @@ import { useState } from 'react';
 export function NameForm(props) {
     const [name, setName] = useState("");
     React.useEffect(() => {
+        setName("")
         console.log("NameForm: useEffect");
-        const backup = document.querySelector("canvas").style;
-        document.querySelector("canvas").style.pointerEvents = "none";
-
-        return () => {document.querySelector("canvas").style = backup};
+        
+        props.allowClick.current = false
+        localStorage.removeItem("name");
+        return () => {
+          
+          props.allowClick.current = true
+        };
     }, [])
     
     const handleSubmit = (e) => {
+      props.allowClick.current = true
       console.log(e)
       e.preventDefault();
       if(name.length < 1){
@@ -20,11 +25,10 @@ export function NameForm(props) {
       }
       console.log(`Submitting Name ${name}`)
       localStorage.setItem('name', name);
-      const elem = document.querySelector('canvas');
-      elem.click()
+      document.body.click()
     }
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="nonskip">
         <label>
           เธอมีชื่อว่าอะไรเอ่ย?
           <input

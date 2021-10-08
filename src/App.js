@@ -18,6 +18,8 @@ export const App = () => {
   const [count, setCount] = useState(0)
   const [textcolor, setTextColor] = useState('#ffffff')
   const allowClick = useRef(true)
+  const [fade, setFade] = useState(true);
+  let loading = useRef(false);
 
   const content = [
     <LogoScreen></LogoScreen>,
@@ -34,23 +36,23 @@ export const App = () => {
     <GetName></GetName>, //name of users
     <RadioForm allowClick={allowClick}></RadioForm>,
     //HowAreYou Radio Form
-    "ขอให้วันนี้เป็นวันที่ดีสำหรับเธอนะ",
+    "10 ขอให้วันนี้เป็นวันที่ดีสำหรับเธอนะ",
     "ฉันก็รู้สึกแบบเดียวกันกับเธอ",
     "เพราะฉันคือเธอในโลกคู่ขนาน",
     "โลกที่ทุกคนเป็นใครก็ได้ที่ตัวเองต้องการ",
     "โลกที่ตัวอักษรทำให้คนหายไปได้...",
-    "wwwww",
-    "qqqqqq",
-    "qaqaqaqqaq",
     //wait for 3 seconds
     //fade to canvas 2
     <InputBox allowClick={allowClick}></InputBox>,
-    <Submitbutton handleCount={setCount} allowClick={allowClick}></Submitbutton>
-      
+    <Submitbutton handleCount={setCount} handleFade={setFade} 
+    loading={loading}  
+    allowClick={allowClick}></Submitbutton>,
+    "17th slide", 
+    "18th slide",
+    "19th slide",
+    "20th slide"
 ]
   // const [loading, setLoading] = React.useState(false);
-  let loading = useRef(false);
-  const [fade, setFade] = useState(true);
 
   const handleClick = (e) => {
     console.log(e)

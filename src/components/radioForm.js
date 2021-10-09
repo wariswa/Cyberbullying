@@ -34,49 +34,24 @@ export function RadioForm(props) {
     return (
             <div className="radio-container nonskip">
         
-            <h2>วันนี้เธอเป็นอย่างไรบ้าง?</h2>
+            <p>วันนี้เธอเป็นอย่างไรบ้าง?</p>
             
-        <ul>
-        <li onClick={handleChange}>
-            <input type="radio" id="a-option" name="selector" />
-            <label htmlFor="a-option">มีความสุขมาก</label>
-            
-            <div className="check"></div>
-        </li>
-        
-        <li onClick={handleChange}>
-            <input type="radio" id="b-option" name="selector" />
-            <label htmlFor="b-option">ก็ไม่ได้แย่นะ ค่อนข้างดี</label>
-            
-            <div className="check"><div className="inside"></div></div>
-        </li>
-        
-        <li onClick={handleChange}>
-            <input type="radio" id="c-option" name="selector" />
-            <label htmlFor="c-option">เฉยๆ เหมือนทุกๆวัน</label>
-            
-            <div className="check"><div className="inside"></div></div>
-        </li>
 
-        <li onClick={handleChange}>
-            <input type="radio" id="d-option" name="selector" />
-            <label htmlFor="d-option">ไม่ค่อยดีเลย</label>
-            
-            <div className="check"><div className="inside"></div></div>
-        </li>
+        <input type="submit" id="firstbutton" name="selector" value="มีความสุขมาก" 
+         className="feelingButton" />
+        
+        <input type="submit" id="firstbutton" name="selector" value="ก็ไม่ได้แย่นะ ค่อนข้างดี" 
+         className="feelingButton" />
+        
+        <input type="submit" id="firstbutton" name="selector" value="เฉยๆ เหมือนทุกๆวัน" 
+         className="feelingButton" />
+        
+        <input type="submit" id="firstbutton" name="selector" value="ไม่ค่อยดีเลย" 
+         className="feelingButton" />
 
-        <li onClick={handleChange}>
-            <input type="radio" id="e-option" name="selector" />
-            <label htmlFor="e-option">เป็นวันที่ไม่มีความสุขมากวันนึง</label>
-            
-            <div className="check"><div className="inside"></div></div>
-        </li>
-        <li onClick={handleRadioSubmit}>
-            <input className="radiobutton" type="submit" value="ยืนยัน" onClick={()=>{}} 
-                style={{marginTop: "30px"}}
-            />
-        </li>
-        </ul>
+        <input type="submit" id="firstbutton" name="selector" value="เป็นวันที่ไม่มีความสุขมากวันนึง" 
+         className="feelingButton" />
+
         </div>
     );
   }

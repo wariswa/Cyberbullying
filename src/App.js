@@ -20,6 +20,7 @@ export const App = () => {
   const allowClick = useRef(true)
 
   const content = [
+    <InputBox allowClick={allowClick}></InputBox>,
     <LogoScreen></LogoScreen>,
     "*Trigger Warning*",
     <>{"เว็บไซต์นี้มีคำถามเกี่ยวกับเหตุการณ์หรือประสบการณ์ในอดีตของตัวคุณ"} <br/> {"ซึ่งอาจมีผลกระทบต่อจิตใจคุณ ไม่มากก็น้อย"}</>,
@@ -39,12 +40,9 @@ export const App = () => {
     "เพราะฉันคือเธอในโลกคู่ขนาน",
     "โลกที่ทุกคนเป็นใครก็ได้ที่ตัวเองต้องการ",
     "โลกที่ตัวอักษรทำให้คนหายไปได้...",
-    "wwwww",
-    "qqqqqq",
-    "qaqaqaqqaq",
     //wait for 3 seconds
     //fade to canvas 2
-    <InputBox allowClick={allowClick}></InputBox>,
+    
     <Submitbutton handleCount={setCount} allowClick={allowClick}></Submitbutton>
       
 ]

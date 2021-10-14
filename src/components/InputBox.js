@@ -33,16 +33,15 @@ export function InputBox(props) {
  
         return (
         <div className="textArea">
-        <form onSubmit={handleSubmit} className="nonskip">
-        <label className="inputbox-container"> Hello World  
+        <form onSubmit={handleSubmit} id="messageform" className="nonskip">
+        <label className="inputbox-container"> Hello World  </label>
           {/* //!TODO:  change hello world with proper text and give some padding and css */}
           {/* //!TODO:  also change css for button and position it correctly... */}
           
           <textarea id="message" onChange={handleChange} value={text}
-            style={{fontSize: "17px", color: "white"}}
+            style={{fontSize: "17px", color: "white", margin: "10px"}}
           ></textarea>
           
-          </label>
         <input className="textarea-submit-button" type="submit" value="ยืนยัน" onClick={handleSubmit} />
           
         </form>

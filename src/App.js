@@ -7,6 +7,8 @@ import { InputBox } from './components/InputBox';
 import {LogoScreen } from './components/LogoScreen';
 import * as PIXI from 'pixi.js';
 import { DropShadowFilter } from '@pixi/filter-drop-shadow';
+import {Howl, Howler} from 'howler';
+
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
@@ -19,6 +21,11 @@ export const App = () => {
   const [textcolor, setTextColor] = useState('#ffffff')
   const allowClick = useRef(true)
 
+  const [fade, setFade] = useState(true);
+  let loading = useRef(false);
+  let currentsound = useRef(null);
+  
+
   const content = [
     <InputBox allowClick={allowClick}></InputBox>,
     <LogoScreen></LogoScreen>,
@@ -26,29 +33,63 @@ export const App = () => {
     <>{"เว็บไซต์นี้มีคำถามเกี่ยวกับเหตุการณ์หรือประสบการณ์ในอดีตของตัวคุณ"} <br/> {"ซึ่งอาจมีผลกระทบต่อจิตใจคุณ ไม่มากก็น้อย"}</>,
     "หากคำถามของเราทำให้คุณรู้สึกไม่สบายใจหรืออึดอัด สามารถออกจากเว็บไซต์เราได้ทันที",
     <>{"เว็บไซต์นี้ ไม่มีการเก็บข้อมูลจากผู้ใช้งาน เพียงแต่ต้องการเป็นส่วนหนึ่ง"} <br/> {"ในการส่งเสริมการใช้สื่อสังคมออนไลน์อย่างมีสติ"}</>, 
-    "ไม่สายไปที่จะหยุด...",
-    "Cyber Bullying",
-    //flash
-    //same canvas
-    //nameForm appear
+    "5 ไม่สายไปที่จะหยุด...",
+    "6 Cyber Bullying",
     <NameForm allowClick={allowClick}></NameForm>,
     <GetName></GetName>, //name of users
     <RadioForm allowClick={allowClick}></RadioForm>,
     //HowAreYou Radio Form
-    "ขอให้วันนี้เป็นวันที่ดีสำหรับเธอนะ",
+    "10 ขอให้วันนี้เป็นวันที่ดีสำหรับเธอนะ",
     "ฉันก็รู้สึกแบบเดียวกันกับเธอ",
     "เพราะฉันคือเธอในโลกคู่ขนาน",
     "โลกที่ทุกคนเป็นใครก็ได้ที่ตัวเองต้องการ",
-    "โลกที่ตัวอักษรทำให้คนหายไปได้...",
+    "14 โลกที่ตัวอักษรทำให้คนหายไปได้...",
     //wait for 3 seconds
     //fade to canvas 2
-    
-    <Submitbutton handleCount={setCount} allowClick={allowClick}></Submitbutton>
-      
-]
+    <Submitbutton handleCount={setCount} handleFade={setFade} 
+    loading={loading}  
+    allowClick={allowClick}></Submitbutton>,
+    "17th slide", 
+    "18th slide",
+    "19th slide",
+    "20th slide"
+  ]
   // const [loading, setLoading] = React.useState(false);
-  let loading = useRef(false);
-  const [fade, setFade] = useState(true);
+  useEffect(() => {
+    console.log(count)
+    if(count === 5){
+      currentsound.current = new Howl({
+        src: ['assets/love.mp3'],
+        loop: true,
+        volume: 0.5,
+        preload: true,
+        onend: function() {
+          console.log('Finished!');
+        }
+      });
+      currentsound.current.rate(0.5);
+      currentsound.current.play();
+    }
+    if (count == 13){
+      console.log("count is 13")
+      currentsound.current.fade(0.5, 0, 2000);
+      setTimeout(() => {
+        currentsound.current.stop();
+        currentsound.current = new Howl({
+          src: ['assets/strong.mp3'],
+          loop: true,
+          volume: 0.5,
+          preload: true,
+          onend: function() {
+            console.log('Finished!');
+          }
+        });
+        currentsound.current.rate(0.5);
+        currentsound.current.play();
+      }, 2000);
+    }
+    
+  }, [count]);
 
   const handleClick = (e) => {
     console.log(e)
@@ -67,6 +108,7 @@ export const App = () => {
     }
     loading.current = true;
     setFade(false);
+    
     setTimeout(()=>{
       setCount(prevCount => prevCount + 1)
       setFade(true);
@@ -186,6 +228,7 @@ export const App = () => {
       // app.renderer.render( app.stage)
     }
     animate()
+    
     
     return () => {
       app.destroy(true)

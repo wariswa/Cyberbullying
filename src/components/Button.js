@@ -11,13 +11,37 @@ export function Submitbutton(props) {
             setValue(event.target.innerText)
         }
         if(text === "firstbutton"){
-            props.handleCount(0) //TODO: change 0 with proper destination screen count
+            props.loading.current = true;
+            props.handleFade(false);
+            setTimeout(()=>{
+                props.handleCount(17) //TODO: change 0 with proper destination screen count
+                props.handleFade(true);
+            }, 1000)
+            setTimeout(function () {
+                props.loading.current = false;
+            }, 2000)
         }  
         else if(text === "secondbutton"){
-            props.handleCount(0) //TODO: change 0 with proper destination screen count
+            props.loading.current = true;
+            props.handleFade(false);
+            setTimeout(()=>{
+                props.handleCount(17) //TODO: change 0 with proper destination screen count
+                props.handleFade(true);
+            }, 1000)
+            setTimeout(function () {
+                props.loading.current = false;
+            }, 2000)
         }
         else if(text === "thirdbutton"){
-            props.handleCount(0) //TODO: change 0 with proper destination screen count
+            props.loading.current = true;
+            props.handleFade(false);
+            setTimeout(()=>{
+                props.handleCount(19) //TODO: change 0 with proper destination screen count
+                props.handleFade(true);
+            }, 1000)
+            setTimeout(function () {
+                props.loading.current = false;
+            }, 2000)
         }
 
     };
@@ -45,15 +69,15 @@ export function Submitbutton(props) {
         
     
         <input type="submit" id="firstbutton" name="selector" value="เคย" 
-         className="button" onClick={(e)=>handleSubmit(e,"firstbutton")}/>
+         className="button nonskip" onClick={(e)=>handleSubmit(e,"firstbutton")}/>
         
     
         <input type="submit" id="secondbutton" name="selector" value="ไม่แน่ใจ" 
-        className="button" onClick={(e)=>handleSubmit(e,"secondbutton")}/>
+        className="button nonskip" onClick={(e)=>handleSubmit(e,"secondbutton")}/>
         
      
         <input type="submit" id="thirdbutton" name="selector" value="ไม่เคย" 
-        className="button" onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
+        className="button nonskip" onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
         
      
     

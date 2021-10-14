@@ -3,28 +3,21 @@ import React from 'react';
 
 export function RadioForm(props) {
 
-    const [value, setValue] = React.useState(null);
-
-    const handleChange = (event) => {
-        console.log(event.target.innerText)
-        if(event.target.innerText.length > 0){
-            setValue(event.target.innerText)
-        }
-    };
+    
     const handleRadioSubmit = (e) => {
         props.allowClick.current = true
         e.preventDefault();
-        if(!value || value.length === 0){
+        console.log(e.target.value)
+        if(!e.target.value || e.target.value === 0){
             alert("Please select an option")
             return;
         }
-        localStorage.setItem('radio1', value);
+        localStorage.setItem('radio1', e.target.value);
         document.body.click()
     }
 
     React.useEffect(() => {
         console.log("Radioform: useEffect");
-        setValue(null)
         localStorage.removeItem('radio1')
         props.allowClick.current = false
         return () => {props.allowClick.current = true};
@@ -38,19 +31,19 @@ export function RadioForm(props) {
             
 
         <input type="submit" id="firstbutton" name="selector" value="มีความสุขมาก" 
-         className="feelingButton" />
+         className="feelingButton" onClick={handleRadioSubmit} />
         
         <input type="submit" id="firstbutton" name="selector" value="ก็ไม่ได้แย่นะ ค่อนข้างดี" 
-         className="feelingButton" />
+         className="feelingButton" onClick={handleRadioSubmit}  />
         
         <input type="submit" id="firstbutton" name="selector" value="เฉยๆ เหมือนทุกๆวัน" 
-         className="feelingButton" />
+         className="feelingButton" onClick={handleRadioSubmit} />
         
         <input type="submit" id="firstbutton" name="selector" value="ไม่ค่อยดีเลย" 
-         className="feelingButton" />
+         className="feelingButton" onClick={handleRadioSubmit} />
 
         <input type="submit" id="firstbutton" name="selector" value="เป็นวันที่ไม่มีความสุขมากวันนึง" 
-         className="feelingButton" />
+         className="feelingButton" onClick={handleRadioSubmit}/>
 
         </div>
     );

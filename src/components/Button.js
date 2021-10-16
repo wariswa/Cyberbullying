@@ -65,7 +65,7 @@ export function Submitbutton(props) {
     return (
         <div className="submit-container" >
     
-        <h2>เธอเคยพิมพ์คำพวกนี้ใส่ใครไหม?</h2>
+        <h2 style={{fontWeight:500 ,fontSize:"19px", paddingLeft:"20px", marginBottom:"0"}}>เธอเคยพิมพ์คำพวกนี้ใส่ใครไหม?</h2>
         
     
         <input type="submit" id="firstbutton" name="selector" value="เคย" 
@@ -73,11 +73,10 @@ export function Submitbutton(props) {
         
     
         <input type="submit" id="secondbutton" name="selector" value="ไม่แน่ใจ" 
-        className="button nonskip" onClick={(e)=>handleSubmit(e,"secondbutton")}/>
-        
-     
+        className="button nonskip" style={{marginTop:"20px"}} onClick={(e)=>handleSubmit(e,"secondbutton")}/>
+
         <input type="submit" id="thirdbutton" name="selector" value="ไม่เคย" 
-        className="button nonskip" onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
+        className="button nonskip" style={{marginTop:"20px"}} onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
         
      
     

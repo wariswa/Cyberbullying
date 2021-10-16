@@ -8,7 +8,7 @@ import {LogoScreen } from './components/LogoScreen';
 import * as PIXI from 'pixi.js';
 import { DropShadowFilter } from '@pixi/filter-drop-shadow';
 import {Howl, Howler} from 'howler';
-
+import something from './components/something.jpeg'
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
@@ -27,6 +27,9 @@ export const App = () => {
   
 
   const content = [
+    <Submitbutton handleCount={setCount} handleFade={setFade} 
+    loading={loading}  
+    allowClick={allowClick}></Submitbutton>,
     <InputBox allowClick={allowClick}></InputBox>,
     <LogoScreen></LogoScreen>,
     "*Trigger Warning*",
@@ -34,7 +37,7 @@ export const App = () => {
     "หากคำถามของเราทำให้คุณรู้สึกไม่สบายใจหรืออึดอัด สามารถออกจากเว็บไซต์เราได้ทันที",
     <>{"เว็บไซต์นี้ ไม่มีการเก็บข้อมูลจากผู้ใช้งาน เพียงแต่ต้องการเป็นส่วนหนึ่ง"} <br/> {"ในการส่งเสริมการใช้สื่อสังคมออนไลน์อย่างมีสติ"}</>, 
     "5 ไม่สายไปที่จะหยุด...",
-    "6 Cyber Bullying",
+    "6 Cyberbullying",
     <NameForm allowClick={allowClick}></NameForm>,
     <GetName></GetName>, //name of users
     <RadioForm allowClick={allowClick}></RadioForm>,
@@ -46,18 +49,21 @@ export const App = () => {
     "14 โลกที่ตัวอักษรทำให้คนหายไปได้...",
     //wait for 3 seconds
     //fade to canvas 2
-    <Submitbutton handleCount={setCount} handleFade={setFade} 
-    loading={loading}  
-    allowClick={allowClick}></Submitbutton>,
-    "17th slide", 
-    "18th slide",
-    "19th slide",
-    "20th slide"
+    <img src={something} alt="cute" style={{width: '100%', height: '100%'}}/>,
+    
+    "a เธอเคยพูดคำแบบนี้กับคนอื่นในโลกออนไลน์รึเปล่า? ปุ่ม", //if yes go to b, if no go to g
+    "b เธอรู้สึกอย่างไร เมื่อได้พิมพ์คำเหล่านั้นออกไป? เขียน", //go to c
+    "c เธอคิดว่าผู้รับข้อความนั้นจะรู้สึกอย่างไร? เขียน", // go to d
+    "d แล้วเธอเคยได้รับข้อความแบบนี้รึเปล่า?", //if yes go to e, if no go to g
+    "e เท่าที่จำความได้ เธอโดนว่าอย่างไรบ้างล่ะ?", //go to f
+    "f เธอรู้สึกอย่างไรบ้าง เมื่อได้รับข้อความแบบนั้น? เขียน", //go to g
+    "g เธอรู้จักคำว่า Cyberbullying มั้ย? ปุ่มรู้จัก ไม่รู้จัก ไปจบที่หน้าเดียวกัน คือหน้าไซเบอบูลี่คือ", //go to h
+    "h Cyberbullying คือ"
   ]
   // const [loading, setLoading] = React.useState(false);
   useEffect(() => {
     console.log(count)
-    if(count === 5){
+    if(count === 0){
       currentsound.current = new Howl({
         src: ['assets/love.mp3'],
         loop: true,

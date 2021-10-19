@@ -5,7 +5,7 @@ export function InputBox(props) {
     const [text, setText] = useState("");
     React.useEffect(() => {
       console.log("nameform: useEffect");
-      const usermessage = localStorage.getItem("usermessage");
+      const usermessage = localStorage.getItem(props.heading);
       if( usermessage && usermessage !== "") {
         setText(usermessage);
       }
@@ -15,7 +15,7 @@ export function InputBox(props) {
 
     const handleChange = (e) => {
       setText(e.target.value)
-      localStorage.setItem("usermessage", e.target.value);
+      localStorage.setItem(props.heading, e.target.value);
     }
     
     const handleSubmit = (e) => {
@@ -26,7 +26,7 @@ export function InputBox(props) {
         return;
       }
       console.log(`Submitting Message ${text}`)
-      localStorage.setItem('message1', text);
+      localStorage.setItem(props.heading, text);
       document.body.click()
     }
 
@@ -34,7 +34,7 @@ export function InputBox(props) {
         return (
         <div className="textArea">
         <form onSubmit={handleSubmit} id="messageform" className="nonskip">
-        <label className="inputbox-container"> Hello World  </label>
+        <label className="inputbox-container"> {props.heading}  </label>
           {/* //!TODO:  change hello world with proper text and give some padding and css */}
           {/* //!TODO:  also change css for button and position it correctly... */}
           

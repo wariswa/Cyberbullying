@@ -14,7 +14,7 @@ export function Submitbutton(props) {
             props.loading.current = true;
             props.handleFade(false);
             setTimeout(()=>{
-                props.handleCount(17) //TODO: change 0 with proper destination screen count
+                props.handleCount(props.yes) //TODO: change 0 with proper destination screen count
                 props.handleFade(true);
             }, 1000)
             setTimeout(function () {
@@ -25,7 +25,7 @@ export function Submitbutton(props) {
             props.loading.current = true;
             props.handleFade(false);
             setTimeout(()=>{
-                props.handleCount(17) //TODO: change 0 with proper destination screen count
+                props.handleCount(props.maybe) //TODO: change 0 with proper destination screen count
                 props.handleFade(true);
             }, 1000)
             setTimeout(function () {
@@ -36,7 +36,7 @@ export function Submitbutton(props) {
             props.loading.current = true;
             props.handleFade(false);
             setTimeout(()=>{
-                props.handleCount(19) //TODO: change 0 with proper destination screen count
+                props.handleCount(props.no) //TODO: change 0 with proper destination screen count
                 props.handleFade(true);
             }, 1000)
             setTimeout(function () {
@@ -65,7 +65,7 @@ export function Submitbutton(props) {
     return (
         <div className="submit-container" >
     
-        <h2 style={{fontWeight:500 ,fontSize:"19px", paddingLeft:"20px", marginBottom:"0"}}>เธอเคยพิมพ์คำพวกนี้ใส่ใครไหม?</h2>
+        <h2 style={{fontWeight:500 ,fontSize:"19px", paddingLeft:"20px", marginBottom:"0"}}>{props.question}</h2>
         
     
         <input type="submit" id="firstbutton" name="selector" value="เคย" 

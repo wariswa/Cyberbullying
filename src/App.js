@@ -9,10 +9,12 @@ import * as PIXI from 'pixi.js';
 import { DropShadowFilter } from '@pixi/filter-drop-shadow';
 import {Howl, Howler} from 'howler';
 import something from './components/something.jpeg'
+import YesNo from './components/YesNo';
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
 }
+
 
 const randomInt = ( max, min) => Math.floor( Math.random() * (max - min) + min)
 
@@ -27,10 +29,7 @@ export const App = () => {
   
 
   const content = [
-    <Submitbutton handleCount={setCount} handleFade={setFade} 
-    loading={loading}  
-    allowClick={allowClick}></Submitbutton>,
-    <InputBox allowClick={allowClick}></InputBox>,
+    
     <LogoScreen></LogoScreen>,
     "*Trigger Warning*",
     <>{"เว็บไซต์นี้มีคำถามเกี่ยวกับเหตุการณ์หรือประสบการณ์ในอดีตของตัวคุณ"} <br/> {"ซึ่งอาจมีผลกระทบต่อจิตใจคุณ ไม่มากก็น้อย"}</>,
@@ -51,13 +50,25 @@ export const App = () => {
     //fade to canvas 2
     <img src={something} alt="cute" style={{width: '100%', height: '100%'}}/>,
     
-    "a เธอเคยพูดคำแบบนี้กับคนอื่นในโลกออนไลน์รึเปล่า? ปุ่ม", //if yes go to b, if no go to g
-    "b เธอรู้สึกอย่างไร เมื่อได้พิมพ์คำเหล่านั้นออกไป? เขียน", //go to c
-    "c เธอคิดว่าผู้รับข้อความนั้นจะรู้สึกอย่างไร? เขียน", // go to d
-    "d แล้วเธอเคยได้รับข้อความแบบนี้รึเปล่า?", //if yes go to e, if no go to g
-    "e เท่าที่จำความได้ เธอโดนว่าอย่างไรบ้างล่ะ?", //go to f
-    "f เธอรู้สึกอย่างไรบ้าง เมื่อได้รับข้อความแบบนั้น? เขียน", //go to g
-    "g เธอรู้จักคำว่า Cyberbullying มั้ย? ปุ่มรู้จัก ไม่รู้จัก ไปจบที่หน้าเดียวกัน คือหน้าไซเบอบูลี่คือ", //go to h
+    <Submitbutton handleCount={setCount} handleFade={setFade} 
+    loading={loading} allowClick={allowClick}
+    question={"เธอเคยพิมพ์คำพวกนี้ใส่ใครไหม?"} yes={17} maybe={17} no={22}></Submitbutton>,
+    // <YesNo allowClick={allowClick} text="a เธอเคยพูดคำแบบนี้กับคนอื่นในโลกออนไลน์รึเปล่า?"
+    //   handleCount={setCount}></YesNo>, //if yes go to b, if no go to g
+    <InputBox allowClick={allowClick} heading={"b เธอรู้สึกอย่างไร เมื่อได้พิมพ์คำเหล่านั้นออกไป? เขียน"}></InputBox>, //go to c
+    <InputBox allowClick={allowClick} heading={"c เธอคิดว่าผู้รับข้อความนั้นจะรู้สึกอย่างไร? เขียน"}></InputBox>, // go to d
+    <Submitbutton handleCount={setCount} handleFade={setFade} 
+    loading={loading} allowClick={allowClick}
+    question={"d แล้วเธอเคยได้รับข้อความแบบนี้รึเปล่า?"} yes={21} maybe={21} no={23}></Submitbutton>, //if yes go to e, if no go to g
+    <InputBox allowClick={allowClick} heading={"e เท่าที่จำความได้ เธอโดนว่าอย่างไรบ้างล่ะ?"}></InputBox>, //go to f
+    <InputBox allowClick={allowClick} heading={"f เธอรู้สึกอย่างไรบ้าง เมื่อได้รับข้อความแบบนั้น? เขียน"}></InputBox>, // go to g
+    <YesNo text={"g เธอรู้จักคำว่า Cyberbullying มั้ย? ปุ่มรู้จัก ไม่รู้จัก ไปจบที่หน้าเดียวกัน คือหน้าไซเบอบูลี่คือ"}
+      allowClick={allowClick}
+      loading={loading}
+      handleFade={setFade}
+      yes={23}
+      no={23}
+      handleCount={setCount}></YesNo>, //go to h
     "h Cyberbullying คือ"
   ]
   // const [loading, setLoading] = React.useState(false);

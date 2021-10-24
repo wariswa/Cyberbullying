@@ -127,9 +127,9 @@ export const App = () => {
   // const [loading, setLoading] = React.useState(false);
   useEffect(() => {
     console.log(count)
-    if(count === 0){
+    //if(count === 0){
       currentsound.current = new Howl({
-        src: ['assets/love.mp3'],
+        src: ['assets/piano.mp3'],
         loop: true,
         volume: 0.5,
         preload: true,
@@ -139,28 +139,28 @@ export const App = () => {
       });
       currentsound.current.rate(0.5);
       currentsound.current.play();
-    }
-    if (count == 13){
-      console.log("count is 13")
-      currentsound.current.fade(0.5, 0, 2000);
-      setTimeout(() => {
-        currentsound.current.stop();
-        currentsound.current = new Howl({
-          src: ['assets/strong.mp3'],
-          loop: true,
-          volume: 0.5,
-          preload: true,
-          onend: function() {
-            console.log('Finished!');
-          }
-        });
-        currentsound.current.rate(0.5);
-        currentsound.current.play();
-      }, 2000);
-    }
+    // }
+    // if (count == 13){
+    //   console.log("count is 13")
+    //   currentsound.current.fade(0.5, 0, 2000);
+    //   setTimeout(() => {
+    //     currentsound.current.stop();
+    //     currentsound.current = new Howl({
+    //       src: ['assets/piano.mp3'],
+    //       loop: true,
+    //       volume: 0.5,
+    //       preload: true,
+    //       onend: function() {
+    //         console.log('Finished!');
+    //       }
+    //     });
+    //     currentsound.current.rate(0.5);
+    //     currentsound.current.play();
+    //   }, 2000);
+    // }
     
-  }, [count]);
-
+  }, []);    //  [count] 
+ 
   const handleClick = (e) => {
     console.log(e)
     // if event path elements contains "nonskip" as classname, return

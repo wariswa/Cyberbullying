@@ -5,17 +5,14 @@ export function InputBox(props) {
     const [text, setText] = useState("");
     React.useEffect(() => {
       console.log("nameform: useEffect");
-      const usermessage = localStorage.getItem(props.heading);
-      if( usermessage && usermessage !== "") {
-        setText(usermessage);
-      }
+      
       props.allowClick.current = false
       return () => {props.allowClick.current = true};
     }, [])
 
     const handleChange = (e) => {
       setText(e.target.value)
-      localStorage.setItem(props.heading, e.target.value);
+      localStorage.setItem("message"+props.messagenumber, e.target.value);
     }
     
     const handleSubmit = (e) => {
@@ -25,8 +22,9 @@ export function InputBox(props) {
         alert("กรุณากรอกข้อความ");
         return;
       }
+      setText("");
       console.log(`Submitting Message ${text}`)
-      localStorage.setItem(props.heading, text);
+      localStorage.setItem("message"+props.messagenumber, text);
       document.body.click()
     }
 

@@ -4,6 +4,7 @@ body {
   padding: 0px;
   margin: 0px;
   cursor: pointer;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent; /* for removing the highlight */
   font-family: 'Kanit', sans-serif;
   -webkit-user-select: none; /* Safari */        
@@ -39,3 +40,20 @@ canvas {
 
 
 
+.comment-image{
+  width: 100%;
+  max-height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  height: auto;
+  max-height: 1080px;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .comment-image{
+    max-height: 100vh;
+    overflow: hidden;
+    transform: scale(1.8);
+  }
+}
+  

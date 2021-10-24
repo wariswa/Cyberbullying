@@ -44,11 +44,11 @@ const YesNo = (props) => {
     <h2 style={{fontWeight:500 ,fontSize:"19px", paddingLeft:"20px", marginBottom:"0"}}>{props.text}</h2>
     
 
-    <input type="submit" id="firstbutton" name="selector" value="เคย"
+    <input type="submit" id="firstbutton" name="selector" value={props.customyes? props.customyes : "เคย"}
     style={{width: "25%", transform: "translate(158%, 50%)"}}
      className="button nonskip" onClick={(e)=>handleSubmit(e,"firstbutton")}/>
     
-    <input type="submit" id="thirdbutton" name="selector" value="ไม่เคย" 
+    <input type="submit" id="thirdbutton" name="selector" value={props.customno ? props.customno : "ไม่เคย"} 
     className="button nonskip" style={{marginTop:"20px", width: "25%", transform: "translate(158%, 50%)"}} onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
     
  

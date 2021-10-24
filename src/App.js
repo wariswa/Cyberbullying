@@ -50,34 +50,34 @@ export const App = () => {
     "โลกที่ตัวอักษรทำให้คนหายไปได้...",
     //wait for 3 seconds
     //fade to canvas 2
-    <img src={cb1} alt="cute" style={{width: '100%', height: '100%'}}/>,
-    <img src={cb2} alt="cute" style={{width: '100%', height: '100%'}}/>,
-    <img src={cb3} alt="cute" style={{width: '100%', height: '100%'}}/>,
+    <img src={cb1} alt="image" className={"comment-image"} />,
+    <img src={cb2} alt="image" className={"comment-image"} />,
+    <img src={cb3} alt="image" className={"comment-image"} />,
     <YesNo text={"เธอรู้สึกคุ้นเคยหรือเคยเห็นคำเหล่านี้ไหม?"}
       allowClick={allowClick}
       loading={loading}
       handleFade={setFade}
-      yes={23} //apple
-      no={23} //orange
+      yes={count+1} //apple
+      no={count+7} //orange
       handleCount={setCount}></YesNo>,
     <Submitbutton handleCount={setCount} handleFade={setFade} 
     loading={loading} allowClick={allowClick}
-    question={"เธอเคยพิมพ์คำพวกนี้ใส่ใครไหม?"} yes={17} maybe={17} no={22}></Submitbutton>, //apple
+    question={"เธอเคยพิมพ์คำพวกนี้ใส่ใครไหม?"} yes={count+1} maybe={count+1} no={count+3}></Submitbutton>, //apple
     // <YesNo allowClick={allowClick} text="a เธอเคยพูดคำแบบนี้กับคนอื่นในโลกออนไลน์รึเปล่า?"
     //   handleCount={setCount}></YesNo>, //if yes go to b, if no go to g
-    <InputBox allowClick={allowClick} heading={"เธอรู้สึกอย่างไร เมื่อได้พิมพ์คำเหล่านั้นออกไป?"}></InputBox>, //go to c
-    <InputBox allowClick={allowClick} heading={"เธอคิดว่าผู้รับข้อความนั้นจะรู้สึกอย่างไร?"}></InputBox>, // go to d
+    <InputBox allowClick={allowClick} heading={"เธอรู้สึกอย่างไร เมื่อได้พิมพ์คำเหล่านั้นออกไป?"} messagenumber={0}></InputBox>, //go to c
+    <InputBox allowClick={allowClick} heading={"เธอคิดว่าผู้รับข้อความนั้นจะรู้สึกอย่างไร?"} messagenumber={1}></InputBox>, // go to d
     <Submitbutton handleCount={setCount} handleFade={setFade} 
     loading={loading} allowClick={allowClick}
-    question={"แล้วเธอเคยได้รับข้อความแบบนี้รึเปล่า?"} yes={21} maybe={21} no={23}></Submitbutton>, //if yes go to e, if no go to g
-    <InputBox allowClick={allowClick} heading={"เท่าที่จำความได้ เธอโดนว่าอย่างไรบ้างล่ะ?"}></InputBox>, //go to f
-    <InputBox allowClick={allowClick} heading={"เธอรู้สึกอย่างไรบ้าง เมื่อได้รับข้อความแบบนั้น?"}></InputBox>, // go to g
+    question={"แล้วเธอเคยได้รับข้อความแบบนี้รึเปล่า?"} yes={count+1} maybe={count+1} no={count+3}></Submitbutton>, //if yes go to e, if no go to g
+    <InputBox allowClick={allowClick} heading={"เท่าที่จำความได้ เธอโดนว่าอย่างไรบ้างล่ะ?"} messagenumber={2}></InputBox>, //go to f
+    <InputBox allowClick={allowClick} heading={"เธอรู้สึกอย่างไรบ้าง เมื่อได้รับข้อความแบบนั้น?"} messagenumber={3}></InputBox>, // go to g
     <YesNo text={"เธอรู้จักคำว่า Cyberbullying ไหม?"} //orange
       allowClick={allowClick}
       loading={loading}
       handleFade={setFade}
-      yes={23} //mango
-      no={23} //watermelon
+      yes={count+2} //mango
+      no={count+1} //watermelon
       handleCount={setCount}></YesNo>,
     "งั้นเดี๋ยวเราอธิบายให้เธอฟังนะ", //watermelon
     "Cyberbullying คือ การกระทำรูปแบบหนึ่งที่เกิดขึ้นบนพื้นที่ออนไลน์ เกิดการละเมิดสิทธิต่างๆ จนทำให้ผู้อื่นหวาดกลัว ตกใจ รู้สึกแย่ ไร้ค่าและกลายเป็นตัวตลกของสังคม ซึ่งจะเห็นได้ชัดในยุคปัจจุบันที่ทุกคนมีโซเชียลมีเดียเป็นของตัวเอง", //mango
@@ -96,7 +96,7 @@ export const App = () => {
     "การตกเป็นเหยื่อของการ cyber bullying มีผลกระทบหลายๆด้าน ทั้งจิตใจและสุขภาพทางอารมณ์ การคุยกับคนที่เราเองไว้ใจ จะช่วยบรรเทาผ่อนคลายความทุกข์ได้",
     "ที่เราได้บอกกับเธอไป เป็นเพียงคำแนะนำของเรา",
     "ถึงจะมีวิธีการรับมือต่างๆ แต่ก็ปฏิเสธไม่ได้ว่าไม่มีวิธีไหนที่สามารถนำความรู้สึกที่เสียไป กลับมาได้ร้อยเปอร์เซ็นต์",
-    <InputBox allowClick={allowClick} heading={"หากเธอโดนบูลลี่ เธอจะทำยังไง?"}></InputBox>,
+    <InputBox allowClick={allowClick} heading={"หากเธอโดนบูลลี่ เธอจะทำยังไง?"} messagenumber={4}></InputBox>,
     "เป็นคำตอบที่ดีนะ",
     "หากเธอเคยเป็นเหยื่อของการ Cyberbullying",
     "เรามีอะไรอยากจะบอกเธอ ตั้งใจฟังล่ะ",
@@ -108,9 +108,11 @@ export const App = () => {
     <YesNo text={"วันนี้เธอได้ความรู้เกี่ยวกับ Cyberbullying ไหม?"}
       allowClick={allowClick}
       loading={loading}
+      customyes={"pratik"}
+      customno={"wariswa"}
       handleFade={setFade}
-      yes={23}
-      no={23}
+      yes={count+1}
+      no={count+2}
       handleCount={setCount}></YesNo>,
     "เราดีใจที่เราได้ให้ความรู้เล็กๆน้อยๆกับเธอนะ",
     "เราเสียใจที่ไม่สามารถให้ความรู้เธอได้เท่าที่ควรนะ",

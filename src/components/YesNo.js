@@ -16,6 +16,7 @@ const YesNo = (props) => {
         }
         if(text === "firstbutton"){
             props.loading.current = true;
+            localStorage.setItem("วันนี้", "firstbutton")
             props.handleFade(false);
             setTimeout(()=>{
                 props.handleCount(props.yes) //TODO: change 0 with proper destination screen count
@@ -27,6 +28,7 @@ const YesNo = (props) => {
         }  
         else if(text === "thirdbutton"){
             props.loading.current = true;
+            localStorage.setItem("วันนี้", "thirdbutton")
             props.handleFade(false);
             setTimeout(()=>{
                 props.handleCount(props.no) //TODO: change 0 with proper destination screen count
@@ -45,11 +47,11 @@ const YesNo = (props) => {
     
 
     <input type="submit" id="firstbutton" name="selector" value={props.customyes? props.customyes : "เคย"}
-    style={{width: "25%", transform: "translate(158%, 50%)"}}
+    style={{width: "100%", marginTop:"20px"}}
      className="button nonskip" onClick={(e)=>handleSubmit(e,"firstbutton")}/>
     
     <input type="submit" id="thirdbutton" name="selector" value={props.customno ? props.customno : "ไม่เคย"} 
-    className="button nonskip" style={{marginTop:"20px", width: "25%", transform: "translate(158%, 50%)"}} onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
+    className="button nonskip" style={{marginTop:"20px", width: "100%"}} onClick={(e)=>handleSubmit(e,"thirdbutton")}/>
     
  
 

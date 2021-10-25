@@ -60,12 +60,12 @@
   display: block;
   padding: 10px;
   /* margin: 20px; */
-  width: 50%;
+  width: 100%;
   border: 0.16em solid rgb(255, 255, 255);
   border-radius: 2em;
   box-sizing: border-box;
   text-decoration: none;
-  transform: translate(50%,50%);
+  /* transform: translate(50%,50%); */
   font-family: 'Kanit', sans-serif;
   font-weight: 300;
   font-size: 18px;
@@ -152,7 +152,7 @@
   overflow-wrap: break-word;
   display: block;
   width: 40vw;
-  height: 50vh;
+  height: 40vh;
   border: 0.16em solid rgb(255, 255, 255);
   border-radius: 1em;
   box-sizing: border-box;
@@ -190,13 +190,13 @@
   padding: 10px;
   /* margin: 20px; */
   margin-top: 20px;
-  width: 10vw;
+  width: 7vw;
   border: 0.16em solid rgb(255, 255, 255);
   border-radius: 2em;
   box-sizing: border-box;
   text-decoration: none;
   font-family: 'Kanit', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   color: #ffffff;
   text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
   text-align: center;
@@ -204,6 +204,17 @@
   background-color:transparent;
   cursor: pointer;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .textarea-submit-button {
+    width: 22vw;
+  }
+  #message {
+    width: 65vw;
+    height: 30vh;
+  }
+  
 }
 .yesno {
   width: 30%;

@@ -12,6 +12,7 @@ import cb1 from './components/cb1.jpg'
 import cb2 from './components/cb2.jpg'
 import cb3 from './components/cb3.jpg'
 import YesNo from './components/YesNo';
+import LastScreen from './components/LastScreen';
 
 export const GetName = () => {
   return <> {`สวัสดี ${localStorage.getItem("name")} วันนี้เธอเป็นอย่างไรบ้าง?`}</>
@@ -121,7 +122,9 @@ export const App = () => {
     "เราต้องไปแล้วล่ะ",
     "ขอให้เธอมีความสุขต่อจากนี้และตลอดไป",
     "ขอบคุณที่มาเล่นเว็บไซต์เรานะ",
-    "บ๊าย บาย"
+    "บ๊าย บาย",
+    <LastScreen handleCount={setCount} handleFade={setFade} loading={loading}></LastScreen>,
+
     
 
 
